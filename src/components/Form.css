@@ -1,0 +1,28 @@
+.elemento-form {
+   padding: 16px;
+   border: 1px  ;
+}
+
+.elemento-form-button{
+   background-color: green;
+   color: white ;
+   font-size: medium;
+   border-radius: 12px;
+   padding: 5px;
+   border: 10px solid green;
+   float: right;
+   
+}
+
+label{
+   padding-right: 10px;
+   font-weight: bold;
+   
+}
+
+input:focus{
+
+   background-color: rgba(46, 43, 43, 0.61);
+   color: white;
+   font-weight: bold;
+}

@@ -1,0 +1,24 @@
+
+
+.contenedor-incidencias {
+  padding-top: 40px;
+  display: flex;
+  padding-bottom: 60px;
+}
+
+main {
+  flex: 1;
+  background-color: lightgray;
+  padding: 10px;
+  border: 5px solid white;
+  border-radius: 15px;
+}
+
+aside {
+  width: 600px;
+  background-color: rgb(187, 224, 236);
+  padding: 20px;
+  border: 5px solid white;
+  border-radius: 15px;
+}
+

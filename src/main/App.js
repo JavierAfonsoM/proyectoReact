@@ -111,7 +111,6 @@ function App() {
 
 
         <main>
-          <p>Esta aplicacion muestra el contenido almacenado de mi app:</p>
           <MiLista incidencias={incidencias} />
         </main>
 

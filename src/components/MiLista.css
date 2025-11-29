@@ -1,0 +1,43 @@
+
+.tablaLista {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); 
+  border-radius: 8px 8px 0 0;
+  overflow: hidden; 
+}
+
+.tablaLista thead tr {
+  background-color: rgb(187, 224, 236); 
+  color: #000000;
+  text-align: left;
+  font-weight: bold;
+}
+
+
+.tablaLista th,
+.tablaLista td {
+  padding: 12px 15px;
+}
+
+
+.tablaLista tbody tr {
+  border-bottom: 1px solid #dddddd;
+  transition: all 0.2s ease;
+}
+
+
+.tablaLista tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+
+
+.tablaLista tbody tr:hover {
+  background-color: #f1f1f1;
+  color: bold; 
+  font-weight: 600;
+  cursor: default;
+}

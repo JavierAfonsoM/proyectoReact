@@ -1,24 +1,35 @@
-
+import './MiLista.css';
 
 function MiLista(props) {
 
     return (
         <div>
-            <ul>
-                {props.incidencias.map((i) =>
-                (
-                    < li key={i.id_incidencia} >
-                        <dt> <strong>    Titulo:        </strong> {i.titulo}          </dt>
-                        <dd> <strong>    ID:            </strong> {i.id_incidencia}   </dd>
-                        <dd> <strong>    Descripcion:   </strong> {i.descripcion}     </dd>
-                        <dd> <strong>    Usuario:       </strong> {i.id_usuario}      </dd>
-                        <dd> <strong>    Urgencia:      </strong> {i.nivel_urgencia}  </dd>
-                        <dd> <strong>    Ubicacion:     </strong> {i.ubicacion}       </dd>
-                        <dd> <strong>    Fecha:         </strong> {i.fecha_registro}  </dd>
-                        <br />
-                    </li>
-                ))}
-            </ul >
+            <table className="tablaLista">
+                <thead>
+                    <tr>
+                        <th>Titulo</th>
+                        <th>ID</th>
+                        <th>Descripcion</th>
+                        <th>Usuario</th>
+                        <th>Urgencia</th>
+                        <th>Ubicacion</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {props.incidencias.map((i) => (
+                        <tr key={i.id_incidencia}>
+                            <td>{i.titulo}</td>
+                            <td>{i.id_incidencia}</td>
+                            <td>{i.descripcion}</td>
+                            <td>{i.id_usuario}</td>
+                            <td>{i.nivel_urgencia}</td>
+                            <td>{i.ubicacion}</td>
+                            <td>{i.fecha_registro}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     )
 

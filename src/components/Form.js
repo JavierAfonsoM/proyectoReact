@@ -1,8 +1,5 @@
 import './Form.css';
 
-
-
-
 function Form(props) {
 
     const envioFormulario = (evento) => {
@@ -15,7 +12,9 @@ function Form(props) {
             form.categoria.value,
             form.nivel.value,
             form.ubicacion.value
-        )
+        );
+        alert("Incidencia registrada con exito");
+        form.reset();
     }
 
 

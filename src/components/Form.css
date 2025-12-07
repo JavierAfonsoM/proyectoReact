@@ -33,6 +33,7 @@
 
 
 .elemento-form input[type="text"],
+.elemento-form input[type="email"],
 .elemento-form select,
 .elemento-form textarea {
   width: 100%; 

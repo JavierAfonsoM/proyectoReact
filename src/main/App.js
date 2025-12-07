@@ -1,103 +1,133 @@
 import './App.css';
 import Footer from '../footer/Footer';
 import Header from '../header/Header';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MiLista from '../components/MiLista';
 import Form from '../components/Form';
 
+
 function App() {
 
-  const [incidencias, setIncidencias] = useState([
-    {
-      id_incidencia: 1,
-      id_usuario: 'u1234',
-      titulo: "proyector averiado en aula 2",
-      descripcion: "El proyector del aula 2 no enciende y no muestra imagen.",
-      categoria: "Hardware",
-      nivel_urgencia: "Alto",
-      fecha_registro: "2024-06-15",
-      estado: "Abierto",
-      ubicacion: "A301"
-    },
-    {
-      id_incidencia: 2,
-      id_usuario: 'u5678',
-      titulo: "ordenador de secretaria no enciende",
-      descripcion: "El ordenador de la secretaria no arranca al pulsar el botón de encendido.",
-      categoria: "Hardware",
-      nivel_urgencia: "Medio",
-      fecha_registro: "2024-06-14",
-      estado: "En progreso",
-      ubicacion: "Secretaria"
-    },
-    {
-      id_incidencia: 3,
-      id_usuario: 'u9101',
-      titulo: "impresora sin conexion",
-      descripcion: "La impresora del departamento no se conecta a la red.",
-      categoria: "Red",
-      nivel_urgencia: "Bajo",
-      fecha_registro: "2024-06-13",
-      estado: "Cerrado",
-      ubicacion: "Departamento de Matematicas"
-    },
-    {
-      id_incidencia: 4,
-      id_usuario: 'u1121',
-      titulo: "pantalla tactil no responde",
-      descripcion: "No responde la pantalla.",
-      categoria: "Hardware",
-      nivel_urgencia: "Alto",
-      fecha_registro: "2024-06-12",
-      estado: "Abierto",
-      ubicacion: "Biblioteca"
-    },
-    {
-      id_incidencia: 5,
-      id_usuario: 'u3141',
-      titulo: "altavoces sin sonido",
-      descripcion: "Los altavoces del aula de musica no emiten sonido.",
-      categoria: "Hardware",
-      nivel_urgencia: "Medio",
-      fecha_registro: "2024-06-11",
-      estado: "En progreso",
-      ubicacion: "Aula de Musica"
-    }
-  ])
+  const INCIDENCIA_API_URL = 'http://localhost:3004/incidencias';
+  const USUARIO_API_URL = 'http://localhost:3004/users';
 
-  const agregarIncidencia = (nuevo_titulo, nuevo_usuario, nuevo_descripcion, nuevo_categoria,
+  const [usuarios, setUsuario] = useState([]);
+  const [incidencias, setIncidencias] = useState([])
+
+  // carga al renderizado inicial
+  //  incidencias desde json-server
+  useEffect(() => {
+    //carga de incidencias
+    const obtenerIncidencias = async () => {
+      try {
+        let respuesta = await fetch(INCIDENCIA_API_URL);
+        if (!respuesta.ok) {
+          throw new Error('Error al obtener las incidencias');
+        }
+        const datos = await respuesta.json();
+        console.log('Incidencias obtenidas:', datos);
+        setIncidencias(datos);
+      } catch (error) {
+        console.error('Error fetching incidencias:', error);
+      }
+    }
+
+    //carga de usuarios
+    const obtenerUsuarios = async () => {
+      try {
+        let respuesta = await fetch(USUARIO_API_URL);
+        if (!respuesta.ok) {
+          throw new Error('Error al obtener los usuarios');
+        }
+        const datos = await respuesta.json();
+        console.log('Usuarios obtenidos:', datos);
+        setUsuario(datos);
+      } catch (error) {
+        console.error('Error fetching usuarios:', error);
+      }
+    }
+
+
+    obtenerIncidencias();
+    obtenerUsuarios();
+
+  }, []);
+
+
+
+
+
+  // agregar incidencias
+  const agregarIncidencia = async (nuevo_titulo, nuevo_usuario, nuevo_descripcion, nuevo_categoria,
     nuevo_nivel_urgencia, nuevo_ubicacion) => {
+    try {
+      //formateo fecha
+      const fecha = new Date();
+      const year = fecha.getFullYear();
+      const month = String(fecha.getMonth() + 1).padStart(2, '0'); // meses 0-11
+      const day = String(fecha.getDate()).padStart(2, '0');
+      const fechaFormateada = `${year}-${month}-${day}`;
 
-    const fecha = new Date();
-    const year = fecha.getFullYear();
-    const month = String(fecha.getMonth() + 1).padStart(2, '0'); // meses 0-11
-    const day = String(fecha.getDate()).padStart(2, '0');
-    const fechaFormateada = `${year}-${month}-${day}`;
+      // verificacion ID unico
+      const nuevo_id = incidencias.length + 1;
+      const esDuplicado = incidencias.some(incidencia => incidencia.id_incidencia === nuevo_id);
+      // manejo de error ID duplicado
+      if (esDuplicado) {
+        alert("Error: La incidencia con ID " + nuevo_id + " ya existe.");
+        return;
+      }
 
-    const nuevo_id = incidencias.length + 1;
-    const esDuplicado = incidencias.some(incidencia => incidencia.id_incidencia === nuevo_id);
+      // busqueda usuario existente
+      let usuarioEncontrado = usuarios.find(user => user.email === nuevo_usuario);
 
-    if (esDuplicado) {
-      alert("Error: La incidencia con ID " + nuevo_id + " ya existe.");
-      return;
+      if (usuarioEncontrado) {
+
+        // nueva incidencia que se agrega al estado
+        const nuevaIncidencia = {
+          id: nuevo_id,
+          usuario: usuarioEncontrado,
+          titulo: nuevo_titulo,
+          descripcion: nuevo_descripcion,
+          categoria: nuevo_categoria,
+          nivel_urgencia: nuevo_nivel_urgencia,
+          fecha_registro: fechaFormateada,
+          ubicacion: nuevo_ubicacion,
+          estado: "Abierta",
+          comentarios: []
+        }
+        // peticion POST al servidor
+        let respuesta = await fetch(INCIDENCIA_API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(nuevaIncidencia)
+        });
+
+        // manejo de error peticion
+        if (!respuesta.ok) {
+          throw new Error('fallo en la peticion post. estado HTTP: ' + respuesta.status);
+        }
+        let datoRespuesta = await respuesta.json();
+        console.log("Respuesta del servidor:", datoRespuesta);
+
+        // insercion de la nueva incidencia
+        setIncidencias([...incidencias, nuevaIncidencia]);
+        alert("Incidencia registrada con exito");
+
+      } else {
+        alert("no se puede crear la incidencia. El usuario con email " + nuevo_usuario + " no existe.");
+        throw new Error("Usuario no encontrado");
+      }
+
+    } catch (error) {
+      console.error('Error al agregar la incidencia:', error);
     }
 
-    const nuevaIncidencia = {
-      id_incidencia: nuevo_id,
-      id_usuario: nuevo_usuario,
-      titulo: nuevo_titulo,
-      descripcion: nuevo_descripcion,
-      categoria: nuevo_categoria,
-      nivel_urgencia: nuevo_nivel_urgencia,
-      fecha_registro: fechaFormateada,
-      estado: "abierto",
-      ubicacion: nuevo_ubicacion
 
 
-    }
-    setIncidencias([...incidencias, nuevaIncidencia]);
 
-    console.log("incidencia ", nuevaIncidencia);
+
   }
 
 

@@ -7,13 +7,13 @@ function Form(props) {
         const form = evento.target;
         props.agregarIncidencia(
             form.titulo.value,
-            form.usuario.value,
+            form.email.value,
             form.descripcion.value,
             form.categoria.value,
             form.nivel.value,
             form.ubicacion.value
         );
-        alert("Incidencia registrada con exito");
+
         form.reset();
     }
 
@@ -30,10 +30,10 @@ function Form(props) {
                     <br />
                 </div>
 
-                {/* usuario*/}
+                {/* usuario email*/}
                 <div className="elemento-form">
-                    <label>Usuario</label>
-                    <input type="text" name="usuario" placeholder="Ej: 45875120v" required />
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="Ej: nombre@dominio.es" required />
                     <br />
                 </div>
 

@@ -4,15 +4,20 @@ import Header from '../header/Header';
 import { useEffect, useState } from 'react';
 import MiLista from '../components/MiLista';
 import Form from '../components/Form';
+import Login from '../components/Login';
 
 
 function App() {
 
   const INCIDENCIA_API_URL = 'http://localhost:3004/incidencias';
   const USUARIO_API_URL = 'http://localhost:3004/users';
+  const USUARIO_LOGIN_URL = 'http://localhost:3004/login';
+
 
   const [usuarios, setUsuario] = useState([]);
   const [incidencias, setIncidencias] = useState([])
+  const [usuarioLogueado, setUsuarioLogueado] = useState(null);
+
 
   // carga al renderizado inicial
   //  incidencias desde json-server
@@ -46,12 +51,37 @@ function App() {
         console.error('Error fetching usuarios:', error);
       }
     }
+    // comprobar usuario logeado
+
 
 
     obtenerIncidencias();
     obtenerUsuarios();
 
   }, []);
+
+  // funcion de inicio de sesion
+
+  const inicioSesion = async (email, password) => {
+
+    const response = await fetch(USUARIO_LOGIN_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ "email": email, "password": password }),
+    });
+
+    if (response.ok) {
+      const userData = await response.json();
+      setUsuarioLogueado(userData);
+
+    } else {
+      const errorData = await response.json();
+      alert(`Fallo de autenticación. Error: ${response.status}: ${errorData} `);
+    }
+
+  };
 
 
 
@@ -123,12 +153,9 @@ function App() {
     } catch (error) {
       console.error('Error al agregar la incidencia:', error);
     }
+  };
 
 
-
-
-
-  }
 
 
 
@@ -138,16 +165,23 @@ function App() {
       <Header />
 
       <div className='contenedor-incidencias'>
+        {usuarioLogueado ? (
+
+          <>
+            <main>
+              <MiLista incidencias={incidencias} />
+            </main>
+
+            <aside>
+              <Form agregarIncidencia={agregarIncidencia} />
+            </aside>
+          </>
 
 
-        <main>
-          <MiLista incidencias={incidencias} />
-        </main>
 
-        <aside>
-          <Form agregarIncidencia={agregarIncidencia} />
-        </aside>
-
+        ) : (
+          <Login inicioSesion={inicioSesion} />
+        )}
       </div>
 
       <Footer />

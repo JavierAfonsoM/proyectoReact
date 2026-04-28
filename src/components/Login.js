@@ -1,4 +1,4 @@
-import './Login.css'; // Importamos el nuevo CSS
+import './Login.css';
 
 function Login(props) {
     const sendFormLogin = (event) => {

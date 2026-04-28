@@ -6,7 +6,7 @@ class Footer extends React.Component {
         return (
             <div id="footer">
                 <h3>
-                    Lorem impsum
+                    &copy; 2024 - Incidencias IT
                 </h3>
             </div>
         );

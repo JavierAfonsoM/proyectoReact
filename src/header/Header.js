@@ -8,6 +8,12 @@ class Header extends React.Component {
                 <h3>
                     Gestión de Incidencias
                 </h3>
+
+                {this.props.usuario && (
+                    <button className="btn-logout" onClick={this.props.cerrarSesion}>
+                        Cerrar Sesión
+                    </button>
+                )}
             </div>
         );
     }

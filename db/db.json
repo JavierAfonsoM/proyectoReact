@@ -319,6 +319,29 @@
       "ubicacion": "b205",
       "estado": "Abierta",
       "comentarios": []
+    },
+    {
+      "id": 15,
+      "usuario": {
+        "id": 1,
+        "nombre": "Ana",
+        "email": "ana.lopez@educastur.org",
+        "password": "$2y$10$paOaxwKhEBC4W/cVeG85puc9W/hoMlzquXQ/6hrMD6VdqIc/mEToq",
+        "rol": {
+          "id": 1,
+          "nombre_rol": "comun",
+          "descripcion": "Usuario regular del sistema"
+        },
+        "fecha_registro": "2025-10-21"
+      },
+      "titulo": "prueba 2",
+      "descripcion": "prueba",
+      "categoria": "Hardware",
+      "nivel_urgencia": "Alto",
+      "fecha_registro": "2026-04-29",
+      "ubicacion": "b205",
+      "estado": "Abierta",
+      "comentarios": []
     }
   ],
   "users": [

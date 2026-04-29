@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import MiLista from '../components/MiLista';
 import Form from '../components/Form';
 import Login from '../components/Login';
-
+import { jwtDecode } from 'jwt-decode';
 
 function App() {
 
@@ -20,7 +20,7 @@ function App() {
 
 
   // carga al renderizado inicial
-  //  incidencias desde json-server
+
   useEffect(() => {
     //carga de incidencias
     const obtenerIncidencias = async () => {
@@ -51,14 +51,37 @@ function App() {
         console.error('Error fetching usuarios:', error);
       }
     }
-    // comprobar usuario logeado
-
-
 
     obtenerIncidencias();
     obtenerUsuarios();
-
   }, []);
+  //-------------------------------------------------------------
+
+  // carga de usuario logeado 
+  //  incidencias desde json-server
+  useEffect(() => {
+
+
+    // obtener usuario logeado
+    const obtenerUsuarioLogeado = () => {
+
+      const savedUser = localStorage.getItem('authToken');
+
+      if (savedUser && savedUser !== 'undefined') {
+
+        const decodedUser = jwtDecode(localStorage.getItem('authToken'));
+        console.log('Usuario logueado:', decodedUser);
+        if (decodedUser) {
+          const user = usuarios.find((u) => u.email === decodedUser.email);
+          user ? setUsuarioLogueado(user) : setUsuarioLogueado(null);
+        }
+      }
+    };
+
+    obtenerUsuarioLogeado();
+
+
+  }, [usuarios]);
 
   // funcion de inicio de sesion
 
@@ -74,7 +97,10 @@ function App() {
 
     if (response.ok) {
       const userData = await response.json();
-      setUsuarioLogueado(userData);
+
+      localStorage.setItem('authToken', userData["accessToken"]);
+
+      setUsuarioLogueado(userData.user);
 
     } else {
       const errorData = await response.json();
@@ -83,7 +109,15 @@ function App() {
 
   };
 
+  const cerrarSesion = () => {
 
+    localStorage.removeItem('authToken');
+
+
+    setUsuarioLogueado(null);
+  };
+
+  //--------------------------------------------------------------------------------------------
 
 
 
@@ -158,11 +192,12 @@ function App() {
 
 
 
-
+  //--------------------------------------------------------------------------------------------
+  // Renderizado de la aplicacion web
   return (
 
     <>
-      <Header />
+      <Header cerrarSesion={cerrarSesion} usuario={usuarioLogueado} />
 
       <div className='contenedor-incidencias'>
         {usuarioLogueado ? (
@@ -175,6 +210,7 @@ function App() {
             <aside>
               <Form agregarIncidencia={agregarIncidencia} />
             </aside>
+
           </>
 
 

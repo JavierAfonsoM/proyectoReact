@@ -6,7 +6,7 @@ import MiLista from '../components/MiLista';
 import Form from '../components/Form';
 import Login from '../components/Login';
 import { jwtDecode } from 'jwt-decode';
-import Menu from '../components/Menu';
+
 import { Routes, Route, Navigate } from 'react-router-dom';
 import UserRoleManagement from '../components/UserRoleManagment';
 import Inicio from '../components/Inicio';
@@ -198,13 +198,13 @@ function App() {
   const cerrarIncidencia = async (id) => {
     try {
       const respuesta = await fetch(`${INCIDENCIA_API_URL}/${id}`, {
-        method: 'PATCH', // Modificación parcial [cite: 132]
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ estado: "Cerrada" })
       });
 
       if (respuesta.ok) {
-        // Actualizamos el estado local para que se vea el cambio
+
         setIncidencias(incidencias.map(inc => inc.id === id ? { ...inc, estado: "Cerrada" } : inc));
         alert("Incidencia cerrada correctamente");
       }
@@ -219,7 +219,7 @@ function App() {
   // Renderizado de la aplicacion web
   return (
     <>
-      {/* El Header ahora contiene la navegación interna */}
+
       <Header cerrarSesion={cerrarSesion} usuario={usuarioLogueado} />
 
       <div className='contenedor-incidencias'>

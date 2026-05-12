@@ -1,5 +1,5 @@
 import React from 'react';
-import './MiLista.css';
+import './MiLista.css'; //reutilizado
 
 function UserRoleManagement({ usuarios, setUsuarios }) {
 

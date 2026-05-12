@@ -1,14 +1,14 @@
-/* Contenedor principal: alinea los bloques de arriba a abajo */
+
 .inicio-container {
-    max-width: 1000px; /* Ajusta según el ancho de tu header/footer */
+    max-width: 1000px; 
     margin: 40px auto;
     display: flex;
-    flex-direction: column; /* Apila bienvenida arriba y stats debajo */
-    gap: 25px; /* Espacio entre la bienvenida y la fila de stats */
+    flex-direction: column; 
+    gap: 25px; 
     padding: 0 20px;
 }
 
-/* Tarjeta de bienvenida: ocupa todo el ancho superior */
+
 .bienvenida-card {
     background: white;
     padding: 30px;
@@ -27,28 +27,28 @@
     margin: 0;
 }
 
-/* El contenedor de las 3 tarjetas: alinea de izquierda a derecha */
+
 .stats-grid {
-    display: flex; /* Activa alineación horizontal */
-    justify-content: space-between; /* Distribuye espacio equitativamente */
-    gap: 20px; /* Espacio entre los cuadritos */
+    display: flex; 
+    justify-content: space-between; 
+    gap: 20px; 
     width: 100%;
 }
 
-/* Estilo individual de cada cuadrito de estadística */
+
 .stat-card {
     background: white;
-    flex: 1; /* Hace que los 3 cuadritos tengan exactamente el mismo ancho */
+    flex: 1; 
     padding: 25px;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-bottom: 5px solid #ddd; /* Línea de color abajo para dar estilo */
+    border-bottom: 5px solid #ddd; 
     transition: transform 0.3s ease;
 }
 
 .stat-card:hover {
-    transform: translateY(-5px); /* Efecto sutil al pasar el ratón */
+    transform: translateY(-5px); 
 }
 
 .stat-card h3 {
@@ -65,7 +65,7 @@
     font-size: 0.85rem;
 }
 
-/* Colores personalizados para las barras inferiores */
-.stat-card.total { border-bottom-color: #3498db; }       /* Azul */
-.stat-card.pendientes { border-bottom-color: #f1c40f; }  /* Amarillo */
-.stat-card.completadas { border-bottom-color: #2ecc71; } /* Verde */
+
+.stat-card.total { border-bottom-color: #3498db; }       
+.stat-card.pendientes { border-bottom-color: #f1c40f; } 
+.stat-card.completadas { border-bottom-color: #2ecc71; } 

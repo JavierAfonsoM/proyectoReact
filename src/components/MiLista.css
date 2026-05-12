@@ -41,3 +41,12 @@
   font-weight: 600;
   cursor: default;
 }
+
+h2 {
+    text-align: center;
+    color: #007f65;         /* Usamos tu verde corporativo para el título */
+    margin-bottom: 25px;
+}
+
+
+

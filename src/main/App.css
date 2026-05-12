@@ -7,6 +7,7 @@
   padding-bottom: 80px; 
   max-width: 1400px; 
   margin: 0 auto; 
+  margin-top: 30px;
 }
 
 main {
@@ -39,4 +40,27 @@ body {
   radial-gradient(circle at 10% 90%, rgba(255, 222, 225, 0.8) 0%, transparent 50%);
   background-attachment: fixed;
   background-size: 100% 100%;
+}
+
+/* Centra el título y el contenido del componente de gestión */
+.gestion-usuarios-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente el h3 y la tabla */
+    width: 100%;
+    
+}
+
+.gestion-usuarios-container h3 {
+    margin-bottom: 20px;
+    text-align: center;
+    
+}
+
+/* Asegura que la tabla no se pegue a los bordes y use su margen auto */
+.tablaLista {
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 600px; /* O el ancho que prefieras para que no se vea muy pequeña */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }

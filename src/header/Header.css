@@ -1,43 +1,67 @@
 #header {
-    background-color: #009879; 
+    background-color: #007f65; /* El color oscuro original que combina con tu footer */
     color: white;
-    text-align: center;
-    padding: 20px 0; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-    
-    position: relative; 
-    z-index: 10; 
+    padding: 0px 40px; /* Reducimos padding vertical para que parezca más una barra */
+    display: flex;
+    justify-content: space-between; /* Título a la izquierda, nav a la derecha */
+    align-items: center;
+    height: 70px; /* Altura fija para que sea una barra */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    position:relative;
+
 }
 
 #header h3 {
     margin: 0;
-    font-weight: 600;
-    letter-spacing: 1px;
-    font-size: 1.5rem;
+    font-size: 1.5em;
+    position: absolute;
+    left:50%;
+    transform: translateX(-50%);
+    white-space: nowrap; /* Evita que el título se divida en varias líneas */
 }
 
-.btn-logout {
-    position: absolute;
-    right: 30px;
-    top: 50%;
-    transform: translateY(-50%); 
-    
-    background-color: #e74c3c; 
-    color: white;
-    border: none;
+/* Contenedor de los botones/links */
+.header-nav {
+    display: flex;
+    gap: 15px; /* Espacio entre botones */
+    align-items: center;
+    margin-left: auto; /* Empuja el nav hacia la derecha */
+}
+
+/* Estilo para que los links parezcan botones sencillos */
+.nav-link-custom {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
     padding: 8px 15px;
-    border-radius: 5px;
-    font-size: 0.9rem;
+    border-radius: 4px;
+    font-size: 0.95em;
+    transition: background 0.3s;
+    background-color: rgba(243, 153, 68, 0.85); /* Un fondo sutil para que parezcan botones */
+}
+
+.nav-link-custom:hover {
+    background-color: rgba(243, 153, 68, 1); /* Efecto sutil al pasar el ratón */
+}
+
+/* El botón de Administrador con un toque distinto */
+.admin-link {
+    color: #f1c40f; /* Un tono amarillo/dorado para resaltar el rol */
     font-weight: bold;
+}
+
+/* Restauramos tu botón rojo de cerrar sesión */
+.btn-logout {
+    background-color: #e74c3c; /* Tu rojo original */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.1s;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s;
 }
 
 .btn-logout:hover {
-    background-color: #c0392b; 
-}
-
-.btn-logout:active {
-    
-    transform: translateY(-50%) scale(0.95);
+    background-color: #c0392b; /* Rojo más oscuro al pulsar */
 }

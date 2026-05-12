@@ -85,3 +85,62 @@
 .elemento-form-button:active {
   transform: scale(0.98);
 }
+
+.form-container {
+    background-color: white; /* Fondo blanco como las tablas */
+    padding: 30px;
+    border-radius: 10px;    /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* La sombra que lo hace resaltar */
+    max-width: 500px;       /* Limitamos el ancho para que no se estire demasiado */
+    margin: 20px auto;      /* Lo centramos horizontalmente */
+    color: #333;            /* Color de texto oscuro para que se lea bien en blanco */
+}
+
+.form-container h2 {
+    text-align: center;
+    color: #007f65;         /* Usamos tu verde corporativo para el título */
+    margin-bottom: 25px;
+}
+
+.elemento-form {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.elemento-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.elemento-form input, 
+.elemento-form textarea, 
+.elemento-form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.elemento-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.elemento-form-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007f65;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.elemento-form-button:hover {
+    background-color: #005f4b;
+}

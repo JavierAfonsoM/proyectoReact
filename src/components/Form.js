@@ -7,7 +7,7 @@ function Form(props) {
         const form = evento.target;
         props.agregarIncidencia(
             form.titulo.value,
-            form.email.value,
+            props.usuario.email,
             form.descripcion.value,
             form.categoria.value,
             form.nivel.value,
@@ -19,23 +19,18 @@ function Form(props) {
 
 
     return (
-        <div>
-            <h2>Registrar incidencias</h2>
+        <div className="form-container">
+
+            <h2>Registrar Nueva Incidencia</h2>
             <form onSubmit={envioFormulario}>
 
                 {/* titulo incidencia */}
                 <div className="elemento-form">
-                    <label>Titulo incidencia</label>
+                    <label>Titulo</label>
                     <input type="text" name="titulo" placeholder="Introduce el titulo" required />
                     <br />
                 </div>
 
-                {/* usuario email*/}
-                <div className="elemento-form">
-                    <label>Email</label>
-                    <input type="email" name="email" placeholder="Ej: nombre@dominio.es" required />
-                    <br />
-                </div>
 
                 {/* descripcion incidencias */}
                 <div className="elemento-form">

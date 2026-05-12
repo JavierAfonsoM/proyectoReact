@@ -6,6 +6,10 @@ import MiLista from '../components/MiLista';
 import Form from '../components/Form';
 import Login from '../components/Login';
 import { jwtDecode } from 'jwt-decode';
+import Menu from '../components/Menu';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import UserRoleManagement from '../components/UserRoleManagment';
+import Inicio from '../components/Inicio';
 
 function App() {
 
@@ -189,44 +193,71 @@ function App() {
     }
   };
 
+  // funcion para cerrar una incidencia (solo admin)
+
+  const cerrarIncidencia = async (id) => {
+    try {
+      const respuesta = await fetch(`${INCIDENCIA_API_URL}/${id}`, {
+        method: 'PATCH', // Modificación parcial [cite: 132]
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ estado: "Cerrada" })
+      });
+
+      if (respuesta.ok) {
+        // Actualizamos el estado local para que se vea el cambio
+        setIncidencias(incidencias.map(inc => inc.id === id ? { ...inc, estado: "Cerrada" } : inc));
+        alert("Incidencia cerrada correctamente");
+      }
+    } catch (error) {
+      console.error("Error al cerrar incidencia:", error);
+    }
+  };
 
 
 
   //--------------------------------------------------------------------------------------------
   // Renderizado de la aplicacion web
   return (
-
     <>
+      {/* El Header ahora contiene la navegación interna */}
       <Header cerrarSesion={cerrarSesion} usuario={usuarioLogueado} />
 
       <div className='contenedor-incidencias'>
-        {usuarioLogueado ? (
-
-          <>
-            <main>
-              <MiLista incidencias={incidencias} />
-            </main>
-
-            <aside>
-              <Form agregarIncidencia={agregarIncidencia} />
-            </aside>
-
-          </>
-
-
-
-        ) : (
+        {!usuarioLogueado ? (
           <Login inicioSesion={inicioSesion} />
+        ) : (
+          <Routes>
+            <Route path="/" element={<Inicio incidencias={incidencias} usuario={usuarioLogueado} />} />
+
+            <Route path="/ver-incidencias" element={
+              <main>
+                <MiLista
+                  incidencias={incidencias}
+                  usuario={usuarioLogueado}
+                  cerrarIncidencia={cerrarIncidencia}
+                />
+              </main>
+            } />
+
+            <Route path="/registrar-incidencia" element={
+              <aside>
+                <Form agregarIncidencia={agregarIncidencia}
+                  usuario={usuarioLogueado} />
+              </aside>
+            } />
+
+            <Route path="/gestion-usuarios" element={
+              usuarioLogueado?.rol?.nombre_rol === "admin" ?
+                <UserRoleManagement usuarios={usuarios} setUsuarios={setUsuario} /> :
+                <Navigate to="/" />
+            } />
+
+          </Routes>
         )}
       </div>
-
       <Footer />
-
     </>
-  )
-
-
+  );
 }
-
 
 export default App;

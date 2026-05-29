@@ -15,7 +15,7 @@ function Inicio({ incidencias, usuario }) {
         <div className="inicio-container">
             <div className="bienvenida-card">
                 <h1>Bienvenido, {(usuario?.nombre || 'Usuario').toUpperCase()} </h1>
-                <p>Bienvenido al sistema de gestión de incidencias del centro.</p>
+                <p>Bienvenido al sistema de gestión de incidencias</p>
             </div>
 
             <div className="stats-grid">

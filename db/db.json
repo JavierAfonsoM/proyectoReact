@@ -41,7 +41,7 @@
       "descripcion": "Varios estudiantes reportan que no pueden conectarse a la red Wi-Fi.",
       "categoria": "Conectividad",
       "nivel_urgencia": "Alta",
-      "estado": "Pendiente",
+      "estado": "Cerrada",
       "ubicacion": "A302",
       "fecha_registro": "2025-10-21",
       "comentarios": []
@@ -409,6 +409,29 @@
       "nivel_urgencia": "Medio",
       "fecha_registro": "2026-05-12",
       "ubicacion": "a204",
+      "estado": "Abierta",
+      "comentarios": []
+    },
+    {
+      "id": 19,
+      "usuario": {
+        "id": 11,
+        "nombre": "javier",
+        "email": "javier@gmail.com",
+        "password": "$2a$12$R0JmYQELnJRNZPbzg5DSAOPAMP8NERHIiH4QG4p1C9BZyZXg1zDEe",
+        "rol": {
+          "id": 2,
+          "nombre_rol": "admin",
+          "descripcion": "Administrador del sistema con permisos totales"
+        },
+        "fecha_registro": "2025-10-21"
+      },
+      "titulo": "incidencia con json",
+      "descripcion": "descripcion",
+      "categoria": "Hardware",
+      "nivel_urgencia": "Alto",
+      "fecha_registro": "2026-05-28",
+      "ubicacion": "b204",
       "estado": "Abierta",
       "comentarios": []
     }

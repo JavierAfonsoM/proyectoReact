@@ -40,6 +40,9 @@
   color: bold; 
   font-weight: 600;
   cursor: default;
+
+  
+  border: 2px solid #000000;
 }
 
 h2 {
@@ -47,6 +50,8 @@ h2 {
     color: #007f65;        
     margin-bottom: 25px;
 }
+
+
 
 
 
